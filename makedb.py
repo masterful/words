@@ -1,7 +1,7 @@
 import sys, csv, re, sqlite3
 
 # Need an alphabet
-betty= "a b c d e f g h i j k l m n o p q r s t u v w x y z".split()
+betty= "abcdefghijklmnopqrstuvwxyz"
 
 # Need a connection to the database
 conn = sqlite3.connect('processed.db')
@@ -15,7 +15,7 @@ try:
     letterdefs += "c" + letter + " INTEGER,"
   c.execute("CREATE TABLE word (" + letterdefs + "usage INTEGER, word TEXT PRIMARY KEY)")
   for letter in betty:
-    c.execute("CREATE INDEX c" + letter + "Index on word (c" + letter +")")
+    c.execute("CREATE INDEX c" + letter + "INDEX ON word (c" + letter +")")
 except:
   c.execute("DELETE FROM word")
 
