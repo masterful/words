@@ -29,11 +29,16 @@ for letter in betty:
 for letter in notletters:
   query += "c" + letter + " = 0 AND "
 
-if numargs > 3:
-  query += "usage >= " + sys.argv[3] + " AND "
+if len(haveletters) or len(notletters):
+  query = query[:-5]
 
-for row in c.execute(query[:-5]):
-  print row
+if numargs > 3:
+  query += " AND usage >= " + sys.argv[3]
+
+print query
+
+for row in c.execute(query):
+  print row[0]
 
 # and save it all, or it was all for naught
 conn.commit()

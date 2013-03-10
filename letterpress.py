@@ -27,7 +27,10 @@ for letter in betty:
 if numargs > 2:
   query += "usage >= " + sys.argv[2] + " AND "
 
-for row in c.execute(query[:-5]):
+query = query[:-5]
+print query
+
+for row in c.execute(query):
   print row
 
 # and save it all, or it was all for naught
