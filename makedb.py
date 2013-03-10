@@ -34,3 +34,7 @@ with open(sys.argv[1], 'r') as f:
       query += str(word.count(letter)) + ","
     query += str(data[1]) + ",'" + word + "')"
     c.execute(query)
+
+# and save it all, or it was all for naught
+conn.commit()
+conn.close()
