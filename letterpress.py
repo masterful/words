@@ -28,10 +28,10 @@ if numargs > 2:
   query += "usage >= " + sys.argv[2] + " AND "
 
 query = query[:-5]
-print query
-
 for row in c.execute(query):
   print row
+
+print query
 
 # and save it all, or it was all for naught
 conn.commit()

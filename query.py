@@ -35,10 +35,10 @@ if len(haveletters) or len(notletters):
 if numargs > 3:
   query += " AND usage >= " + sys.argv[3]
 
-print query
-
 for row in c.execute(query):
   print row[0]
+
+print query
 
 # and save it all, or it was all for naught
 conn.commit()
