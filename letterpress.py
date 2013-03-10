@@ -7,7 +7,7 @@ if 1 > numargs:
   sys.exit(-1)
 
 if "-help" == sys.argv[1]:
-  print "query.py letterpress_grid [usage_threshold]"
+  print "query.py letterpress_grid [[usage_threshold] length]"
   sys.exit(0)
 
 # Need an alphabet
@@ -20,16 +20,20 @@ conn        = sqlite3.connect('processed.db')
 c           = conn.cursor()
 
 # search for them words
-query = "SELECT word from word WHERE "
+query = "SELECT word, length(word) as len FROM word WHERE "
 for letter in betty:
   query += "c" + letter + " <= " + str(haveletters.count(letter)) + " AND "
 
 if numargs > 2:
   query += "usage >= " + sys.argv[2] + " AND "
 
-query = query[:-5]
+if numargs > 3:
+  query += "len >= " + sys.argv[3] + " AND "
+
+query = query[:-5] + " ORDER BY len ASC"
+
 for row in c.execute(query):
-  print row
+  print row[0]
 
 print query
 
